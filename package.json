@@ -1,0 +1,13 @@
+{
+  "name": "jujutsu-calendar",
+  "version": "1.0.0",
+  "description": "Jujutsu Kaisen Mini Calendar",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^29.0.0"
+  }
+}

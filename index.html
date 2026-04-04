@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jujutsu Kaisen Calendar</title>
+    <!-- Pixel fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=VT323&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="calendar" id="outerFrame">
+        <div class="nav-btn prev" id="prevBtn">&lt;</div>
+        <div class="nav-btn next" id="nextBtn">&gt;</div>
+        <div class="calendar-inner">
+            <div class="title" id="titleText">Asif's Calendar</div>
+
+            <div class="main-frame" id="innerFrame">
+                <img class="character-bg" id="charImage" src="" alt="Character">
+                <div class="text-overlay">
+                    <div class="date-number" id="dateNumber"></div>
+                    <div class="month-name" id="monthName"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>

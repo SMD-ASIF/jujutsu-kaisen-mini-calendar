@@ -1,0 +1,197 @@
+:root {
+  /* Default themes - these will be dynamically overridden by JS */
+  --outer-bg: linear-gradient(90deg, rgba(239, 226, 255, 0.7) 0%, rgba(224, 193, 255, 0.7) 100%);
+  --outer-border: #C079FF;
+  --inner-bg: rgba(210, 164, 255, 0.4);
+  --inner-border: #B58CD9;
+  --text-main: #FFFFFF;
+}
+
+body {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Pixelify Sans', sans-serif;
+  user-select: none;
+}
+
+/* calendar - outer frame (214x228) */
+.calendar {
+  box-sizing: border-box;
+  width: 214px;
+  height: 228px;
+  background: var(--outer-bg);
+  border: 2px solid var(--outer-border);
+  border-radius: 20px;
+  position: relative;
+  transition: all 0.5s ease;
+  overflow: hidden;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  -webkit-app-region: drag;
+  /* Allows the borderless widget to be clicked and dragged */
+}
+
+/* Auto layout - inner container (180x196) */
+.calendar-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  position: absolute;
+  width: 180px;
+  height: 196px;
+  left: 15px;
+  /* Auto-centered */
+  top: 14px;
+}
+
+/* title bar (180x27) */
+.title {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+  width: 180px;
+  height: 27px;
+
+  /* Semi-transparent to blend with dynamic app color */
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--outer-border);
+  border-radius: 100px;
+  flex: none;
+
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s ease;
+}
+
+/* main-frame (180x161) containing image + text overlay */
+.main-frame {
+  width: 180px;
+  height: 161px;
+  flex: none;
+  position: relative;
+  border-radius: 12px;
+  border: 2px solid var(--outer-border);
+  overflow: hidden;
+  box-shadow: inset 0px 4px 8px rgba(255, 255, 255, 0.4);
+  background-color: var(--inner-bg);
+  box-sizing: border-box;
+  transition: all 0.5s ease;
+}
+
+/* Image acts as background */
+.character-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  image-rendering: pixelated;
+  z-index: 1;
+}
+
+/* Overlay text perfectly organized at the bottom of the image */
+.text-overlay {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  /* Perfectly aligns the typography baselines regardless of font size */
+  padding: 30px 10px 10px 10px;
+  /* Top padding enables smooth gradient */
+  gap: 12px;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  left: 0px;
+  bottom: 0px;
+  /* Attach to bottom of image */
+  z-index: 2;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+  box-sizing: border-box;
+}
+
+.date-number {
+  flex: none;
+  font-family: 'VT323', monospace;
+  font-size: 48px;
+  /* Clean and legible! NOT 100px! */
+  line-height: 0.8;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+  -webkit-text-stroke: 1.5px var(--text-main);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 0px;
+  transition: -webkit-text-stroke 0.5s ease;
+}
+
+.month-name {
+  flex: none;
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  line-height: 0.8;
+  text-align: center;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  -webkit-text-stroke: 1px var(--text-main);
+  text-transform: uppercase;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  transition: -webkit-text-stroke 0.5s ease;
+}
+
+/* Elegant Navigation Buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.2s ease, transform 0.1s ease;
+  -webkit-app-region: no-drag; /* CRITICAL for clicks to register over the draggable window */
+  font-family: sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.calendar:hover .nav-btn {
+  opacity: 1;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+.nav-btn:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+.nav-btn.prev {
+  left: 3px;
+}
+
+.nav-btn.next {
+  right: 3px;
+}
